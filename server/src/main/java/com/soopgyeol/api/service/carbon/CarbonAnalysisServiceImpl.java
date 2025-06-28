@@ -20,13 +20,10 @@ public class CarbonAnalysisServiceImpl implements CarbonAnalysisService {
         // GPT 분석 요청
         CarbonAnalysisResponse analysis = openAiService.analyzeCarbon(userInput);
 
-        analysis.setCategoryKorean(analysis.getCategory().getDescription());
-
         CarbonItem carbonItem = CarbonItem.builder()
                 .name(analysis.getName())
-                .category(analysis.getCategory())
                 .carbonValue((float) analysis.getCarbonGrams())
-                .growthPoint(analysis.getGrowthPoint())
+                .category(analysis.getCategory())
                 .explanation(analysis.getExplanation())
                 .createdAt(LocalDateTime.now())
                 .build();
